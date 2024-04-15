@@ -102,9 +102,9 @@ color: rgb(255, 255, 255);</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>310</y>
-      <width>91</width>
-      <height>171</height>
+      <y>110</y>
+      <width>111</width>
+      <height>181</height>
      </rect>
     </property>
    </widget>
@@ -222,6 +222,19 @@ QPushButton:pressed {
     </property>
     <property name="text">
      <string>--&gt;</string>
+    </property>
+   </widget>
+   <widget class="QSlider" name="slider">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>460</y>
+      <width>160</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>
