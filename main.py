@@ -28,9 +28,6 @@ class MainWindow(QMainWindow):
         self.slider.setValue(30)
         self.volume = self.slider.value()
 
-        # Инициализация плеера
-        self.player = QMediaPlayer()
-
         # Загрузка списка файлов с музыкой
         self.music_files = get_music_files()
         self.current_index = 0  # Текущий индекс трека
@@ -41,7 +38,6 @@ class MainWindow(QMainWindow):
         # Отображение окна
         self.show()
         self.player.setVolume(self.volume)
-        self.play_music()
 
     def change_volume(self, value):
         self.player.setVolume(value)
@@ -63,6 +59,7 @@ class MainWindow(QMainWindow):
         self.current_index -= 1
         if self.current_index < 0:
             self.current_index = len(self.music_files) - 1
+        self.play_music()
 
     def play_pause(self):
         if self.player.state() == QMediaPlayer.PlayingState:
@@ -101,6 +98,12 @@ class Window(QMainWindow):
         # Загрузка UI из файла
         self.des = uic.loadUi("design\\window2.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.des.menu.clicked.connect(self.MainMenu)
+
+    def MainMenu(self):
+        self.hide()
+        self.mainwindow = MainWindow()
+        self.mainwindow.show()
 
 
 if __name__ == "__main__":
