@@ -140,7 +140,7 @@ QPushButton:pressed {
      <string>Проверка на прочность</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn3">
+   <widget class="QPushButton" name="btn4">
     <property name="geometry">
      <rect>
       <x>258</x>
@@ -168,7 +168,7 @@ QPushButton:pressed {
      <string>Праздничный квест</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn4">
+   <widget class="QPushButton" name="btn3">
     <property name="geometry">
      <rect>
       <x>23</x>
@@ -350,7 +350,7 @@ QPushButton:pressed {
 border-radius: 100;</string>
     </property>
     <property name="text">
-     <string>Кружок</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="menu">
