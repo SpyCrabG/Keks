@@ -4,6 +4,7 @@ from PyQt5.QtCore import QCoreApplication, QUrl, QDir, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVBoxLayout
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic
+import time
 
 project_path = os.path.abspath(".")  # Путь к папке проекта
 music_dir = os.path.join(project_path, "music")  # Путь к папке с музыкой
@@ -99,11 +100,24 @@ class Window(QMainWindow):
         self.des = uic.loadUi("design\\window2.ui", self)
         self.setWindowTitle("Электронный тамада")
         self.des.menu.clicked.connect(self.MainMenu)
+        self.des.btn1.clicked.connect(self.KonkursMenu)
 
     def MainMenu(self):
         self.hide()
         self.mainwindow = MainWindow()
         self.mainwindow.show()
+
+    def KonkursMenu(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+
+class Konkurs(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = uic.loadUi("design\\window3.ui", self)
+        self.setWindowTitle("Электронный тамада")
 
 
 if __name__ == "__main__":
