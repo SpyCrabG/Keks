@@ -4,7 +4,7 @@ from PyQt5.QtCore import QCoreApplication, QUrl, QDir, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVBoxLayout
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic
-import time
+import random
 
 project_path = os.path.abspath(".")  # Путь к папке проекта
 music_dir = os.path.join(project_path, "music")  # Путь к папке с музыкой
@@ -99,16 +99,75 @@ class Window(QMainWindow):
         # Загрузка UI из файла
         self.des = uic.loadUi("design\\window2.ui", self)
         self.setWindowTitle("Электронный тамада")
-        self.des.menu.clicked.connect(self.MainMenu)
-        self.des.btn1.clicked.connect(self.KonkursMenu)
+        rng = range(1, 8)
+        r = random.choice(rng)
+        self.menu.clicked.connect(self.MainMenu)
+        self.btn1.clicked.connect(self.KonkursMenu1)
+        self.btn2.clicked.connect(self.KonkursMenu2)
+        self.btn3.clicked.connect(self.KonkursMenu3)
+        self.btn4.clicked.connect(self.KonkursMenu4)
+        self.btn5.clicked.connect(self.KonkursMenu5)
+        self.btn6.clicked.connect(self.KonkursMenu6)
+        self.btn7.clicked.connect(self.KonkursMenu7)
+        self.btn8.clicked.connect(self.KonkursMenu8)
+        self.btn9.clicked.connect(self.KonkursMenu9)
 
     def MainMenu(self):
         self.hide()
         self.mainwindow = MainWindow()
         self.mainwindow.show()
 
-    def KonkursMenu(self):
+    def KonkursMenu1(self):
         self.hide()
+        self.konkurswindow = Konkurs + "1" + ()
+        self.konkurswindow.show()
+        self.ui.lbl.setText("Гости становятся в круг. \nКаждый по очереди напевает пару строк из песен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и вспомнили больше всех праздничных песен, \nвручаются призы.")
+
+    def KonkursMenu2(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu3(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu4(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu5(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu6(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu7(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu8(self):
+        self.hide()
+        self.konkurswindow = Konkurs()
+        self.konkurswindow.show()
+
+    def KonkursMenu9(self):
+        self.hide()
+        text1 = "Гости становятся в круг. \nКаждый по очереди напевает пару строк из песен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и вспомнили больше всех праздничных песен, \nвручаются призы."
+        #text2 =
+
+
+
+
+
+
         self.konkurswindow = Konkurs()
         self.konkurswindow.show()
 
@@ -116,8 +175,26 @@ class Window(QMainWindow):
 class Konkurs(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = uic.loadUi("design\\window3.ui", self)
+        self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.menu.clicked.connect(self.MainMenu1)
+
+    def MainMenu1(self):
+        self.hide()
+        self.mainwindow1 = MainWindow()
+        self.mainwindow1.show()
+class Konkurs1(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui1 = uic.loadUi("design\\window3.ui", self)
+        self.setWindowTitle("Электронный тамада")
+        self.menu.clicked.connect(self.MainMenu1)
+        self.lbl.setText("1")
+
+    def MainMenu1(self):
+        self.hide()
+        self.mainwindow1 = MainWindow()
+        self.mainwindow1.show()
 
 
 if __name__ == "__main__":
