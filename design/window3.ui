@@ -223,7 +223,7 @@ QPushButton:pressed {
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>../../../../Downloads/2.png</pixmap>
+     <pixmap>../img/2.png</pixmap>
     </property>
    </widget>
   </widget>
