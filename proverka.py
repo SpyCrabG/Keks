@@ -3,7 +3,9 @@ from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import QWidget, QApplication, \
     QLCDNumber, QSlider, QVBoxLayout, QHBoxLayout, QPushButton
 
-
+class MusicWindow(QWidget):
+    def __init__(self):
+        super().__init__()
 class MainWindow(QWidget):
 
     def __init__(self):

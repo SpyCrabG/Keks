@@ -21,6 +21,13 @@ def media(t):
     t.player = QMediaPlayer()
 
 
+class MusicWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self = uic.loadUi("design\\music_menu", self)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
