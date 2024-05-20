@@ -17,38 +17,48 @@ def get_music_files():
     return music_files
 
 
-def media(t):
-    t.player = QMediaPlayer()
-
-
-class MusicWindow(QWidget):
-    def __init__(self):
-        super().__init__()
-
-        self = uic.loadUi("design\\music_menu", self)
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         # Инициализация плеера
-        media(self)
+        self.player = QMediaPlayer()
 
         # Загрузка UI из файла
         self.ui = uic.loadUi("design\\proect_pizdi.ui", self)
+        self.ui.btn2.clicked.connect(self.open_new_window)
+        self.ui.btn1.clicked.connect(self.show_music)
+
+        # Отображение окна
+        self.show()
+
+    def open_new_window(self):
+        self.hide()
+        self.win = Window()
+        self.win.show()
+
+    def show_music(self):
+        music = MusicWindow()
+        music.show()
+
+
+class MusicWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.player = QMediaPlayer()
+
+        self.ui = uic.loadUi("design\\music_menu.ui", self)
+        self.setWindowTitle("Плеер")
         self.slider.valueChanged[int].connect(self.change_volume)
         self.slider.setValue(30)
         self.volume = self.slider.value()
-
-        # Загрузка списка файлов с музыкой
         self.music_files = get_music_files()
         self.current_index = 0  # Текущий индекс трека
+        self.show()
 
         # Настройка кнопок
         self.setup_buttons()
 
         # Отображение окна
-        self.show()
         self.player.setVolume(self.volume)
 
     def change_volume(self, value):
@@ -63,9 +73,6 @@ class MainWindow(QMainWindow):
 
         # Кнопка "Вперед"
         self.ui.btn3.clicked.connect(self.next_track)
-
-        # Кнопка "Открыть новое окно"
-        self.ui.btn4.clicked.connect(self.open_new_window)
 
     def prev_track(self):
         self.current_index -= 1
@@ -97,11 +104,6 @@ class MainWindow(QMainWindow):
         self.player.setMedia(media_content)
         self.player.play()
 
-    def open_new_window(self):
-        self.hide()
-        self.win = Window()
-        self.win.show()
-
 
 class Window(QMainWindow):
     def __init__(self):
@@ -109,7 +111,6 @@ class Window(QMainWindow):
         # Загрузка UI из файла
         self.des = uic.loadUi("design\\window2.ui", self)
         self.setWindowTitle("Электронный тамада")
-        media(self)
         self.menu.clicked.connect(self.MainMenu)
         self.btn1.clicked.connect(self.KonkursMenu1)
         self.btn2.clicked.connect(self.KonkursMenu2)
@@ -122,8 +123,6 @@ class Window(QMainWindow):
         self.btn9.clicked.connect(self.KonkursMenu9)
 
     def MainMenu(self):
-        media(self)
-        self.player.stop()
         self.hide()
         self.mainwindow = MainWindow()
         self.mainwindow.show()
@@ -179,6 +178,7 @@ class Konkurs1(QMainWindow):
         super().__init__()
         self.ui = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.ui.lbl.setText(
             "   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \nпесен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и\nвспомнили больше всех праздничных песен, \nвручаются призы."
@@ -189,12 +189,18 @@ class Konkurs1(QMainWindow):
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
+
 
 class Konkurs2(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
             "    Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей."
@@ -205,12 +211,18 @@ class Konkurs2(QMainWindow):
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
+
 
 class Konkurs3(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -218,6 +230,11 @@ class Konkurs3(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs4(QMainWindow):
@@ -225,6 +242,7 @@ class Konkurs4(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -232,6 +250,11 @@ class Konkurs4(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs5(QMainWindow):
@@ -239,6 +262,7 @@ class Konkurs5(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -246,6 +270,11 @@ class Konkurs5(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs6(QMainWindow):
@@ -253,6 +282,7 @@ class Konkurs6(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -260,6 +290,11 @@ class Konkurs6(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs7(QMainWindow):
@@ -267,6 +302,7 @@ class Konkurs7(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -274,6 +310,11 @@ class Konkurs7(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs8(QMainWindow):
@@ -281,6 +322,7 @@ class Konkurs8(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText("1")
 
@@ -288,6 +330,11 @@ class Konkurs8(QMainWindow):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
+
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 class Konkurs9(QMainWindow):
@@ -296,28 +343,22 @@ class Konkurs9(QMainWindow):
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn2.clicked.connect(self.konkurs_menu)
         self.lbl.setText("1")
-        self.lbl2.display(1)
 
     def MainMenu1(self):
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
-    def timer(self):
-        lbl_timer = self.lbl2.value()
-        if lbl_timer > 0:
-            self.lbl2.display()
-            QTimer().singleShot(1000, self.timer)
-        else:
-            # Значение дисплея стало 0
-            # Включаем элементы интерфейса обратно
-            self.toggle_btns()
-            # Устанавливаем на дисплей выбранную на слайдере настройку
-            self.lbl2.display(self.slider.value())
+    def konkurs_menu(self):
+        self.hide()
+        self.konk = Window()
+        self.konk.show()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
+    window2 = MusicWindow()
     app.exec_()
