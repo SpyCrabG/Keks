@@ -236,7 +236,7 @@ QPushButton:pressed {
     <property name="font">
      <font>
       <family>MS Serif</family>
-      <pointsize>15</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="styleSheet">
@@ -249,7 +249,7 @@ QPushButton:pressed {
 	background-color:	#5AA895; }</string>
     </property>
     <property name="text">
-     <string/>
+     <string>Зачем я пришел на праздник?</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn7">
@@ -277,7 +277,7 @@ QPushButton:pressed {
 	background-color:	#5AA895; }</string>
     </property>
     <property name="text">
-     <string/>
+     <string>Угадай мелодию</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn8">
@@ -305,7 +305,7 @@ QPushButton:pressed {
 	background-color:	#5AA895; }</string>
     </property>
     <property name="text">
-     <string/>
+     <string>Танцевальный баттл</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn9">
