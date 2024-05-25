@@ -26,6 +26,7 @@ class MainWindow(QMainWindow):
         self.ui = uic.loadUi("design\\proect_pizdi.ui", self)
         self.ui.btn2.clicked.connect(self.open_new_window)
         self.ui.btn1.clicked.connect(self.show_music)
+        self.setFixedSize(730, 460)
 
         # Отображение окна
         self.show()
@@ -47,6 +48,7 @@ class MusicWindow(QMainWindow):
 
         self.ui = uic.loadUi("design\\music_menu.ui", self)
         self.setWindowTitle("Плеер")
+        self.setFixedSize(328, 172)
         self.slider.valueChanged[int].connect(self.change_volume)
         self.slider.setValue(30)
         self.volume = self.slider.value()
@@ -110,6 +112,7 @@ class Window(QMainWindow):
         # Загрузка UI из файла
         self.des = uic.loadUi("design\\window2.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.menu.clicked.connect(self.MainMenu)
         self.btn1.clicked.connect(self.KonkursMenu1)
         self.btn2.clicked.connect(self.KonkursMenu2)
@@ -177,6 +180,7 @@ class Konkurs1(QMainWindow):
         super().__init__()
         self.ui = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.ui.lbl.setText(
@@ -199,6 +203,7 @@ class Konkurs2(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -221,6 +226,7 @@ class Konkurs3(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -243,6 +249,7 @@ class Konkurs4(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -265,6 +272,7 @@ class Konkurs5(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -287,6 +295,7 @@ class Konkurs6(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -309,6 +318,7 @@ class Konkurs7(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -331,6 +341,7 @@ class Konkurs8(QMainWindow):
         super().__init__()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
         self.lbl.setText(
@@ -351,10 +362,14 @@ class Konkurs8(QMainWindow):
 class Konkurs9(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
+        self.player.setVolume(50)
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.setFixedSize(800, 500)
         self.menu.clicked.connect(self.MainMenu1)
         self.btn2.clicked.connect(self.konkurs_menu)
+
         spis1 = [
             "   Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей."
         ]
@@ -364,12 +379,45 @@ class Konkurs9(QMainWindow):
         spis3 = [
             "   Некоторые гости могут быть не знакомы друг \n с другом. \n Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе."
         ]
-        spis4 = ["   Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал."]
-        spis5 = ["   Игроки должны открыть \n на своих телефонах фотографии, \n которые так или иначе связаны \n с участниками игры. \n Когда фотографии будут открыты, \n игрокам потребуется положить телефоны \n рядом с друг другом, \n тем самым образовывая фотоколлаж. "]
-        spis6 = ["   Каждый из участников конкурса должен \n  написать на листке причину, \n по которой он пришел на праздник, \n а после положить листок с причиной в банку. \n Кто-то из участников должен вызваться \n добровольцем и задать случайному человеку \n вопрос \n «Зачем он пришел на праздник?», а после \n достать из банки листок. \n Если человеку, которому задали вопрос, \n попался его собственный листок, \n то он побеждает."]
-        spis7 = ["   Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок."]
-        spis8 = ["  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей."]
-        a = self.lbl.setText(random.choice(spis1 + spis2 + spis3 + spis4 + spis5 + spis6 + spis7 + spis8))
+        spis4 = [
+            "   Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал."
+        ]
+        spis5 = [
+            "   Игроки должны открыть \n на своих телефонах фотографии, \n которые так или иначе связаны \n с участниками игры. \n Когда фотографии будут открыты, \n игрокам потребуется положить телефоны \n рядом с друг другом, \n тем самым образовывая фотоколлаж. "
+        ]
+        spis6 = [
+            "   Каждый из участников конкурса должен \n  написать на листке причину, \n по которой он пришел на праздник, \n а после положить листок с причиной в банку. \n Кто-то из участников должен вызваться \n добровольцем и задать случайному человеку \n вопрос \n «Зачем он пришел на праздник?», а после \n достать из банки листок. \n Если человеку, которому задали вопрос, \n попался его собственный листок, \n то он побеждает."
+        ]
+        spis7 = [
+            "   Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок."
+        ]
+        spis8 = [
+            "  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей."
+        ]
+        a = self.lbl.setText(
+            random.choice(spis1 + spis2 + spis3 + spis4 + spis5 + spis6 + spis7 + spis8)
+        )
+
+        def proverka(number):
+            self.player.setMedia(QUrl.fromLocalFile("voice\\" + number + ".ogg"))
+
+        if a == spis1:
+            proverka("1")
+        elif a == spis2:
+            proverka("2")
+        elif a == spis3:
+            proverka("3")
+        elif a == spis4:
+            proverka("4")
+        elif a == spis5:
+            proverka("5")
+        elif a == spis6:
+            proverka("6")
+        elif a == spis7:
+            proverka("7")
+        else:
+            proverka("8")
+        self.player.play()
 
     def MainMenu1(self):
         self.hide()
