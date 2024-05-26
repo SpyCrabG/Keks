@@ -399,7 +399,7 @@ class Konkurs9(QMainWindow):
         )
 
         def proverka(number):
-            self.player.setMedia(QUrl.fromLocalFile("voice\\" + number + ".ogg"))
+            self.player.setMedia(QUrl.fromLocalFile("voice\\" + number + ".mp3"))
 
         if a == spis1:
             proverka("1")
