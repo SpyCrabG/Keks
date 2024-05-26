@@ -1,10 +1,11 @@
 import os
 import sys
 from PyQt5.QtCore import QCoreApplication, QUrl, QDir, Qt, QTimer
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVBoxLayout, QMessageBox
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic, QtTest
 import random
+from playsound import playsound
 
 project_path = os.path.abspath(".")  # Путь к папке проекта
 music_dir = os.path.join(project_path, "music")  # Путь к папке с музыкой
@@ -177,22 +178,43 @@ class Window(QMainWindow):
 
 class Konkurs1(QMainWindow):
     def __init__(self):
+        self.player = QMediaPlayer()
         super().__init__()
         self.ui = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
         self.setFixedSize(800, 500)
+        self.timer = QTimer(self)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.ui.lbl.setText(
             "   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \nпесен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и\nвспомнили больше всех праздничных песен, \nвручаются призы."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\2.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -201,21 +223,42 @@ class Konkurs1(QMainWindow):
 class Konkurs2(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "    Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\1.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -224,21 +267,42 @@ class Konkurs2(QMainWindow):
 class Konkurs3(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
-            "  Некоторые гости могут быть не знакомы друг \n с другом. \n Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе."
+            "  Некоторые гости могут быть не знакомы друг \n с другом. Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\3.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -247,21 +311,42 @@ class Konkurs3(QMainWindow):
 class Konkurs4(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "  Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\4.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -270,21 +355,42 @@ class Konkurs4(QMainWindow):
 class Konkurs5(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "   Игроки должны открыть \n на своих телефонах фотографии, \n которые так или иначе связаны \n с участниками игры. \n Когда фотографии будут открыты, \n игрокам потребуется положить телефоны \n рядом с друг другом, \n тем самым образовывая фотоколлаж. "
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\5.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -293,44 +399,86 @@ class Konkurs5(QMainWindow):
 class Konkurs6(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "  Каждый из участников конкурса должен \n  написать на листке причину, \n по которой он пришел на праздник, \n а после положить листок с причиной в банку. \n Кто-то из участников должен вызваться \n добровольцем и задать случайному человеку \n вопрос \n «Зачем он пришел на праздник?», а после \n достать из банки листок. \n Если человеку, которому задали вопрос, \n попался его собственный листок, \n то он побеждает."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\6.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
+    def timer_pause(self):
+        self.timer.stop()
 
 
 class Konkurs7(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
+        self.timer = QTimer(self)
         self.setFixedSize(800, 500)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "  Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\7.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -339,21 +487,42 @@ class Konkurs7(QMainWindow):
 class Konkurs8(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.player = QMediaPlayer()
         self.ui1 = uic.loadUi("design\\window3.ui", self)
         self.setWindowTitle("Электронный тамада")
         self.setFixedSize(800, 500)
+        self.timer = QTimer(self)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
+        self.btn1.clicked.connect(self.timer_pause)
         self.lbl.setText(
             "  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей."
         )
+        self.player.setMedia(QMediaContent(QUrl.fromLocalFile("voice\\8.mp3")))
+        self.player.play()
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            self.label.setText("Время вышло!")
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
@@ -369,15 +538,23 @@ class Konkurs9(QMainWindow):
         self.setFixedSize(800, 500)
         self.menu.clicked.connect(self.MainMenu1)
         self.btn2.clicked.connect(self.konkurs_menu)
+        self.btn1.clicked.connect(self.timer_pause)
+
+        def proverka(number):
+            self.player.setMedia(
+                QMediaContent(QUrl.fromLocalFile("voice\\" + number + ".mp3"))
+            )
+            self.player.play()
+            self.timer = QTimer(self)
 
         spis1 = [
             "   Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей."
         ]
         spis2 = [
-            "   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \nпесен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и\nвспомнили больше всех праздничных песен, \nвручаются призы."
+            "   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \n песен про праздники и всё, что с ними связано. \n Тот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \n которые проявили себя по полной и\n вспомнили больше всех праздничных песен, \n вручаются призы."
         ]
         spis3 = [
-            "   Некоторые гости могут быть не знакомы друг \n с другом. \n Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе."
+            "   Некоторые гости могут быть не знакомы друг \n с другом. \n Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” \n не будет собран. \n Так все гости познакомятся и узнают \n друг друга ближе."
         ]
         spis4 = [
             "   Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал."
@@ -392,39 +569,65 @@ class Konkurs9(QMainWindow):
             "   Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок."
         ]
         spis8 = [
-            "  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей."
+            "  Разделите участников на пары \n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей."
         ]
-        a = self.lbl.setText(
-            random.choice(spis1 + spis2 + spis3 + spis4 + spis5 + spis6 + spis7 + spis8)
-        )
 
-        def proverka(number):
-            self.player.setMedia(QUrl.fromLocalFile("voice\\" + number + ".mp3"))
+        a = random.choice(spis1 + spis2 + spis3 + spis4 + spis5 + spis6 + spis7 + spis8)
 
-        if a == spis1:
-            proverka("1")
-        elif a == spis2:
-            proverka("2")
-        elif a == spis3:
-            proverka("3")
-        elif a == spis4:
-            proverka("4")
-        elif a == spis5:
-            proverka("5")
-        elif a == spis6:
-            proverka("6")
-        elif a == spis7:
-            proverka("7")
+        self.lbl.setText(a)
+
+        if "Этот конкурс подходит для свадеб" in a:
+            num = "1"
+            proverka(num)
+        elif "Гости становятся в круг" in a:
+            num = "2"
+            proverka(num)
+        elif "Некоторые гости могут быть не знакомы друг" in a:
+            num = "3"
+            proverka(num)
+        elif "Игроки выбирают случайным образом" in a:
+            num = "4"
+            proverka(num)
+        elif "Игроки должны открыть" in a:
+            num = "5"
+            proverka(num)
+        elif "Каждый из участников конкурса должен" in a:
+            num = "6"
+            proverka(num)
+        elif "Выберите несколько известных песен" in a:
+            num = "7"
+            proverka(num)
         else:
-            proverka("8")
-        self.player.play()
+            num = "8"
+            proverka(num)
+        self.timer.timeout.connect(self.update_timer)
+        self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
+        self.remaining_time = 5 * 60  # 5 минут в секундах
+
+    def update_timer(self):
+        if self.remaining_time > 0:
+            minutes = self.remaining_time // 60
+            seconds = self.remaining_time % 60
+            self.lbl2.setText(f"{minutes:2}:{seconds:02}")
+            self.remaining_time -= 1
+        else:
+            QMessageBox.critical(
+                self,
+                "Таймер",
+                "Время истекло",
+                QMessageBox.Ok,
+            )
+    def timer_pause(self):
+        self.timer.stop()
 
     def MainMenu1(self):
+        self.player.stop()
         self.hide()
         self.mainwindow1 = MainWindow()
         self.mainwindow1.show()
 
     def konkurs_menu(self):
+        self.player.stop()
         self.hide()
         self.konk = Window()
         self.konk.show()
