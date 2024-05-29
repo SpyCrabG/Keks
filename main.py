@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVB
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic, QtTest
 import random
-from playsound import playsound
 
 project_path = os.path.abspath(".")  # Путь к папке проекта
 music_dir = os.path.join(project_path, "music")  # Путь к папке с музыкой
