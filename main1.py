@@ -1,7 +1,14 @@
 import os
 import sys
 from PyQt5.QtCore import QCoreApplication, QUrl, QDir, Qt, QTimer
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QPushButton, QVBoxLayout, QMessageBox
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QMainWindow,
+    QPushButton,
+    QVBoxLayout,
+    QMessageBox,
+)
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic, QtTest
 import random
@@ -131,47 +138,80 @@ class Window(QMainWindow):
 
     def KonkursMenu1(self):
         self.hide()
-        self.konkurswindow = Konkurs("   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \nпесен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и\nвспомнили больше всех праздничных песен, \nвручаются призы.", "voice/2.mp3")
+        self.konkurswindow = Konkurs(
+            "   Гости становятся в круг. \nКаждый по очереди напевает пару строк из \nпесен про праздники и всё, что с ними связано. \nТот, кто не может пропеть, вылетает из игры. \n Оставшейся тройке гостей, \nкоторые проявили себя по полной и\nвспомнили больше всех праздничных песен, \nвручаются призы.",
+            "voice/2.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu2(self):
         self.hide()
-        self.konkurswindow = Konkurs("    Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей.", "voice/1.mp3")
+        self.konkurswindow = Konkurs(
+            "    Этот конкурс подходит для свадеб и требует \n подручные средства.\n Новоиспечённые муж и жена получают доски, \n гвозди и молоток. \n Их задача — сколотить свой первый стул. \n Работа должна быть быстрой, слаженной и \n качественной. \n Гостям будет интересно наблюдать, как \nпроявляется пара в совместном деле по хозяйству. \n Примечание: Вместо досок и инструментов \n можно использовать бумагу и клей.",
+            "voice/1.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu3(self):
         self.hide()
-        self.konkurswindow = Konkurs("  Некоторые гости могут быть не знакомы друг \n с другом. Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе.", "voice/3.mp3")
+        self.konkurswindow = Konkurs(
+            "  Некоторые гости могут быть не знакомы друг \n с другом. Тамада проводит конкурс: первый выходит \n “машинист” — дружок, \n называет своё имя и увлечение жизни. \n Затем он “прицепляет” следующего гостя, \n который в свою очередь называет своё имя, \n увлечение по жизни. \n Процесс продолжается, пока весь “паровозик” не будет собран. \nТак все гости познакомятся и узнают \n друг друга ближе.",
+            "voice/3.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu4(self):
         self.hide()
-        self.konkurswindow = Konkurs("  Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал.", "voice/4.mp3")
+        self.konkurswindow = Konkurs(
+            "  Игроки выбирают случайным образом \n одного человека, который будет прятать \n определенный предмет. \n Спрятав его, все остальные игроки должны \nначать искать этот предмет до тех пор, \n пока не истечет отведенное время. Если \n предмет не нашли, то побеждает тот человек, \n который его прятал, а если наоборот, то \n побеждают те, кто его искал.",
+            "voice/4.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu5(self):
         self.hide()
-        self.konkurswindow = Konkurs("   Игроки должны открыть \n на своих телефонах фотографии, \n которые так или иначе связаны \n с участниками игры. \n Когда фотографии будут открыты, \n игрокам потребуется положить телефоны \n рядом с друг другом, \n тем самым образовывая фотоколлаж. ", "voice/5.mp3")
+        self.konkurswindow = Konkurs(
+            "   Игроки должны открыть \n на своих телефонах фотографии, \n которые так или иначе связаны \n с участниками игры. \n Когда фотографии будут открыты, \n игрокам потребуется положить телефоны \n рядом с друг другом, \n тем самым образовывая фотоколлаж. ",
+            "voice/5.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu6(self):
         self.hide()
-        self.konkurswindow = Konkurs("  Каждый из участников конкурса должен \n  написать на листке причину, \n по которой он пришел на праздник, \n а после положить листок с причиной в банку. \n Кто-то из участников должен вызваться \n добровольцем и задать случайному человеку \n вопрос \n «Зачем он пришел на праздник?», а после \n достать из банки листок. \n Если человеку, которому задали вопрос, \n попался его собственный листок, \n то он побеждает.", "voice/6.mp3")
+        self.konkurswindow = Konkurs(
+            "  Каждый из участников конкурса должен \n  написать на листке причину, \n по которой он пришел на праздник, \n а после положить листок с причиной в банку. \n Кто-то из участников должен вызваться \n добровольцем и задать случайному человеку \n вопрос \n «Зачем он пришел на праздник?», а после \n достать из банки листок. \n Если человеку, которому задали вопрос, \n попался его собственный листок, \n то он побеждает.",
+            "voice/6.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu7(self):
         self.hide()
-        self.konkurswindow = Konkurs("  Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок.", "voice/7.mp3")
+        self.konkurswindow = Konkurs(
+            "  Выберите несколько известных песен \n и включите их для участников. \n  Попросите их угадать \n название песни и исполнителя, \n когда они услышат её отрывок.",
+            "voice/7.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu8(self):
-        self.hide("  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей.", "voice/8.mp3")
-        self.konkurswindow = Konkurs()
+        self.hide()
+        self.konkurswindow = Konkurs(
+            "  Разделите участников на пары\n и предложите им исполнить быстрый танец \n под разную музыку. \n Побеждает пара, которая лучше всех проявит \n свои танцевальные навыки \n и получит больше аплодисментов от зрителей.",
+            "voice/8.mp3",
+        )
         self.konkurswindow.show()
 
     def KonkursMenu9(self):
         self.hide()
-        spisok = [self.KonkursMenu1, self.KonkursMenu2, self.KonkursMenu3, self.KonkursMenu4, self.KonkursMenu5, self.KonkursMenu6, self.KonkursMenu7, self.KonkursMenu8]
+        spisok = [
+            self.KonkursMenu1,
+            self.KonkursMenu2,
+            self.KonkursMenu3,
+            self.KonkursMenu4,
+            self.KonkursMenu5,
+            self.KonkursMenu6,
+            self.KonkursMenu7,
+            self.KonkursMenu8,
+        ]
         spisok[random.randrange(8)]()
         # self.konkurswindow = Konkurs9()
         # self.konkurswindow.show()
@@ -187,15 +227,12 @@ class Konkurs(QMainWindow):
         self.timer = QTimer(self)
         self.btn2.clicked.connect(self.konkurs_menu)
         self.menu.clicked.connect(self.MainMenu1)
-        self.btn1.clicked.connect(self.timer_pause)
-        self.ui.lbl.setText(
-            lbl_text
-        )
+        self.ui.lbl.setText(lbl_text)
         self.player.setMedia(QMediaContent(QUrl.fromLocalFile(voice_file)))
         self.player.play()
         self.timer.timeout.connect(self.update_timer)
         self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
-        self.remaining_time = 5 * 60  # 5 минут в секундах
+        self.remaining_time = 5  # 5 минут в секундах
 
     def update_timer(self):
         if self.remaining_time > 0:
@@ -204,9 +241,7 @@ class Konkurs(QMainWindow):
             self.lbl2.setText(f"{minutes:2}:{seconds:02}")
             self.remaining_time -= 1
         else:
-            self.label.setText("Время вышло!")
-    def timer_pause(self):
-        self.timer.stop()
+            self.lbl2.setText("Время вышло!")
 
     def MainMenu1(self):
         self.player.stop()
@@ -219,6 +254,7 @@ class Konkurs(QMainWindow):
         self.hide()
         self.konk = Window()
         self.konk.show()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
