@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
     QMessageBox,
 )
 from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
-from PyQt5 import uic, QtTest
+from PyQt5 import uic, QtTest, QtGui
 import random
 
 project_path = os.path.abspath(".")  # Путь к папке проекта
@@ -31,6 +31,7 @@ class MainWindow(QMainWindow):
 
         # Загрузка UI из файла
         self.ui = uic.loadUi("design/proect_pizdi.ui", self)
+        self.setWindowIcon(QtGui.QIcon("img/som.jpg"))
         self.ui.btn2.clicked.connect(self.open_new_window)
         self.ui.btn1.clicked.connect(self.show_music)
         self.setFixedSize(730, 460)
@@ -54,6 +55,7 @@ class MusicWindow(QMainWindow):
         self.player = QMediaPlayer()
 
         self.ui = uic.loadUi("design/music_menu.ui", self)
+        self.setWindowIcon(QtGui.QIcon("img/som.jpg"))
         self.setWindowTitle("Плеер")
         self.setFixedSize(328, 172)
         self.slider.valueChanged[int].connect(self.change_volume)
@@ -118,6 +120,7 @@ class Window(QMainWindow):
         super().__init__()
         # Загрузка UI из файла
         self.des = uic.loadUi("design/window2.ui", self)
+        self.setWindowIcon(QtGui.QIcon("img/som.jpg"))
         self.setWindowTitle("Электронный тамада")
         self.setFixedSize(800, 500)
         self.menu.clicked.connect(self.MainMenu)
@@ -222,6 +225,7 @@ class Konkurs(QMainWindow):
         self.player = QMediaPlayer()
         super().__init__()
         self.ui = uic.loadUi("design/window3.ui", self)
+        self.setWindowIcon(QtGui.QIcon("img/som.jpg"))
         self.setWindowTitle("Электронный тамада")
         self.setFixedSize(800, 500)
         self.timer = QTimer(self)
