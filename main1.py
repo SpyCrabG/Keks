@@ -236,7 +236,7 @@ class Konkurs(QMainWindow):
         self.player.play()
         self.timer.timeout.connect(self.update_timer)
         self.timer.start(1000)  # Запускаем таймер с интервалом 1 секунда
-        self.remaining_time = 5  # 5 минут в секундах
+        self.remaining_time = 5 * 60  # 5 минут в секундах
 
     def update_timer(self):
         if self.remaining_time > 0:

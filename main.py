@@ -6,6 +6,7 @@ from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
 from PyQt5 import uic, QtTest
 import random
 
+
 project_path = os.path.abspath(".")  # Путь к папке проекта
 music_dir = os.path.join(project_path, "music")  # Путь к папке с музыкой
 ui_file = os.path.join(project_path, "design", "project_pizdi.ui")  # Путь к UI-файлу
